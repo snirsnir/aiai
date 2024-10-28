@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>משחק ציר זמן: היסטוריה של בינה מלאכותית</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        #timeline {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .year-slot {
+            width: 150px;
+            height: 200px;
+            background-color: #fff;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .year-label {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        #card-bank {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .card {
+            width: 130px;
+            height: 180px;
+            background-color: #fff;
+            border: 2px solid #333;
+            border-radius: 10px;
+            padding: 10px;
+            cursor: move;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            font-size: 12px;
+            position: relative;
+        }
+        .card img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            margin-bottom: 5px;
+        }
+        #check-button {
+            font-size: 18px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #feedback {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .explanation {
+            display: none;
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
+            font-size: 15px;
+            width: 200px;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+        }
+        .card:hover .explanation {
+            display: block;
+        }
+        #logo {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 200px;
+    height: auto;
+}
+    </style>
+</head>
+<body>
+    <img id="logo" src="https://media.getmood.io/warehouse/dynamic/217495.png" alt="Technoda Logo">
+    <h1>משחק ציר זמן: היסטוריה של בינה מלאכותית</h1>
+    <div id="timeline">
+        <div class="year-slot" data-year="1950"><div class="year-label">1950</div></div>
+        <div class="year-slot" data-year="1956"><div class="year-label">1956</div></div>
+        <div class="year-slot" data-year="1961"><div class="year-label">1961</div></div>
+        <div class="year-slot" data-year="1966"><div class="year-label">1966</div></div>
+        <div class="year-slot" data-year="1969"><div class="year-label">1969</div></div>
+        <div class="year-slot" data-year="1972"><div class="year-label">1972</div></div>
+        <div class="year-slot" data-year="1981"><div class="year-label">1981</div></div>
+        <div class="year-slot" data-year="1997"><div class="year-label">1997</div></div>
+        <div class="year-slot" data-year="2002"><div class="year-label">2002</div></div>
+        <div class="year-slot" data-year="2011"><div class="year-label">2011</div></div>
+        <div class="year-slot" data-year="2014"><div class="year-label">2014</div></div>
+        <div class="year-slot" data-year="2016"><div class="year-label">2016</div></div>
+        <div class="year-slot" data-year="2018"><div class="year-label">2018</div></div>
+        <div class="year-slot" data-year="2020"><div class="year-label">2020</div></div>
+        <div class="year-slot" data-year="2022"><div class="year-label">2022</div></div>
+        <div class="year-slot" data-year="2023"><div class="year-label">2023</div></div>
+    </div>
+    <div id="card-bank">
+        <div class="card" draggable="true" data-year="1950">
+            <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQgicMDbxzOzwRadaNw7mHUkU1TcXmf1vfMRBbhUatRI9j5jUdO" alt="Alan Turing">
+            <p>אלן טיורינג מפרסם "מכונות מחשבות ואינטליגנציה"</p>
+            <div class="explanation">טיורינג הציג את מבחן טיורינג, אבן דרך חשובה בהגדרת אינטליגנציה מלאכותית. המאמר הניח את היסודות למחקר בתחום הבינה המלאכותית.</div>
+        </div>
+        <div class="card" draggable="true" data-year="1956">
+            <img src="https://upload.wikimedia.org/wikipedia/en/b/b5/Dartmouth-Moscow_2008.jpg" alt="Dartmouth Conference">
+            <p>כינוס דרטמות': טביעת המונח "בינה מלאכותית"</p>
+            <div class="explanation">כינוס זה נחשב לרגע הלידה של בינה מלאכותית כתחום מחקר. המונח "בינה מלאכותית" נטבע כאן לראשונה על ידי ג'ון מקארתי.</div>
+        </div>
+        <div class="card" draggable="true" data-year="1961">
+            <img src="https://www.thehenryford.org/linkedpub-image/qY8EE1_447shRg1F7LyjmbuscyLUg_WU7vXb3cTQvhcTj2k8m7PQdRYBOY4iQFWapWU2OGZlQIZfowKuCYrNMA" alt="Unimate">
+            <p>הרובוט הראשון, Unimate, מתחיל לעבוד בGM</p>
+            <div class="explanation">Unimate היה הרובוט התעשייתי הראשון שעבד בקו ייצור. הוא סימן את תחילת עידן האוטומציה התעשייתית והשימוש ברובוטים בתעשייה.</div>
+        </div>
+        <div class="card" draggable="true" data-year="1966">
+            <img src="https://www.researchgate.net/publication/348306833/figure/fig1/AS:999661896744961@1615349377366/Example-of-ELIZA-ELIZA-a-chatbot-was-designed-by-Joseph-Weizenbaum-to-imitate-a.jpg" alt="ELIZA">
+            <p>פיתוח ELIZA, צ'טבוט טיפולי פשוט</p>
+            <div class="explanation">ELIZA היה צ'טבוט מוקדם שדימה פסיכותרפיסט. למרות פשטותו, הוא הדגים את הפוטנציאל של מערכות שיחה ממוחשבות והשפיע על פיתוח עתידי של AI.</div>
+        </div>
+        <div class="card" draggable="true" data-year="1969">
+            <img src="https://media.hswstatic.com/eyJidWNrZXQiOiJjb250ZW50Lmhzd3N0YXRpYy5jb20iLCJrZXkiOiJnaWZcL2FycGFuZXQtNS5qcGciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjI5MH19fQ==" alt="ARPANET">
+            <p>פיתוח רשת ARPANET, קודמתה של האינטרנט</p>
+            <div class="explanation">ARPANET היוותה את הבסיס לאינטרנט המודרני. היא אפשרה שיתוף מידע ומשאבים בין מחשבים מרוחקים, מה שהיה קריטי להתפתחות AI ומדעי המחשב.</div>
+        </div>
+        <div class="card" draggable="true" data-year="1972">
+            <img src="https://image.slidesharecdn.com/mycinexpertsystem-130420072353-phpapp01/85/Introduction-To-Mycin-Expert-System-1-320.jpg" alt="MYCIN">
+            <p>פיתוח MYCIN, מערכת מומחה לאבחון מחלות</p>
+            <div class="explanation">MYCIN הייתה מערכת מומחה מוקדמת לאבחון מחלות זיהומיות. היא הדגימה את היכולת של AI לסייע בקבלת החלטות רפואיות מורכבות.</div>
+        </div>
+        <div class="card" draggable="true" data-year="1981">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIBCJ_E4aXyfu3W8GtxmsYWZnIsYw5kR-fXg&s" alt="Fifth Generation">
+            <p>יפן משיקה את פרויקט "המחשב הדור החמישי"</p>
+            <div class="explanation">פרויקט זה שאף לפתח מחשבים מתקדמים עם יכולות AI. למרות שלא השיג את כל יעדיו, הוא עורר עניין גלובלי במחקר AI ותרם להתקדמות בתחום.</div>
+        </div>
+        <div class="card" draggable="true" data-year="1997">
+            <img src="https://www.ft.com/__origami/service/image/v2/images/raw/http%3A%2F%2Fcom.ft.imagepublish.upp-prod-eu.s3.amazonaws.com%2F0f12cb56-3409-11e7-99bd-13beb0903fa3?source=next-article&fit=scale-down&quality=highest&width=700&dpr=1" alt="Deep Blue">
+            <p>Deep Blue מנצח את גארי קספרוב בשחמט</p>
+            <div class="explanation">ניצחון זה היה אבן דרך משמעותית, שהדגימה את היכולת של AI להתחרות ולנצח אלופי אנוש במשחקים מורכבים. זה עורר דיון ציבורי על עתיד AI.</div>
+        </div>
+        <div class="card" draggable="true" data-year="2002">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Roomba_original.jpg/640px-Roomba_original.jpg" alt="Roomba">
+            <p>iRobot משיקה את Roomba, שואב האבק הרובוטי</p>
+            <div class="explanation">Roomba היה אחד המוצרים הראשונים שהביאו AI לבתים פרטיים. הוא הדגים כיצד טכנולוגיות AI יכולות לשמש למטרות יומיומיות ולשפר את חיי היומיום.</div>
+        </div>
+        <div class="card" draggable="true" data-year="2011">
+            <img src="https://i.ytimg.com/vi/P18EdAKuC1U/maxresdefault.jpg" alt="Watson">
+            <p>Watson של IBM מנצח בתוכנית Jeopardy!</p>
+            <div class="explanation">ניצחון Watson הדגים את היכולת של AI להבין ולעבד שפה טבעית מורכבת. זה פתח את הדרך ליישומי AI בתחומים כמו רפואה, פיננסים ושירות לקוחות.</div>
+        </div>
+        <div class="card" draggable="true" data-year="2014">
+            <img src="https://www.hpcwire.com/wp-content/uploads/2014/06/Eugene-Turing-Test.png" alt="Turing Test">
+            <p>תוכנת צ'טבוט עוברת את מבחן טיורינג לראשונה</p>
+            <div class="explanation">צ'טבוט בשם Eugene Goostman עבר לכאורה את מבחן טיורינג. למרות שהתוצאה הייתה שנויה במחלוקת, היא עוררה דיון על התקדמות AI ואתגרה את ההגדרות של אינטליגנציה מלאכותית.</div>
+        </div>
+        <div class="card" draggable="true" data-year="2016">
+            <img src="https://c.files.bbci.co.uk/0D9B/production/_88738430_pic1go.jpg" alt="AlphaGo">
+            <p>AlphaGo מנצח את אלוף העולם במשחק Go</p>
+            <div class="explanation">ניצחון AlphaGo היה פריצת דרך משמעותית בAI. Go נחשב למשחק מורכב הרבה יותר משחמט, והניצחון הדגים את היכולת של AI ללמוד ולפתור בעיות מורכבות.</div>
+        </div>
+        <div class="card" draggable="true" data-year="2018">
+            <img src="https://i.ytimg.com/vi/IuIpgArEZig/maxresdefault.jpg" alt="Google Duplex">
+            <p>Google Duplex מדגים שיחה טלפונית אנושית</p>
+            <div class="explanation">Google Duplex הדגים AI שמסוגל לנהל שיחות טלפון טבעיות עם בני אדם. זה עורר דיון על האתיקה של AI ועל ההשלכות של טכנולוגיה שמחקה באופן מושלם אינטראקציות אנושיות.</div>
+        </div>
+        <div class="card" draggable="true" data-year="2020">
+            <img src="https://typelish.com/c/o2gzPqr" alt="GPT-3">
+            <p>GPT-3 מציג יכולות מתקדמות בעיבוד שפה טבעית</p>
+            <div class="explanation">GPT-3 הציג יכולות מרשימות בהבנה ויצירה של טקסט אנושי. הוא פתח אפשרויות חדשות ליישומי AI בתחומים כמו כתיבה, תרגום, ופיתוח תוכנה.</div>
+        </div>
+        <div class="card" draggable="true" data-year="2022">
+            <img src="https://www.labellerr.com/blog/content/images/2022/12/DALL-E-BANNER-1.webp" alt="DALL-E">
+            <p>DALL-E 2 מציג יכולות ביצירת תמונות מטקסט</p>
+            <div class="explanation">DALL-E 2 הדגים יכולת מרשימה ליצור תמונות מתיאורים טקסטואליים. זה פתח אפשרויות חדשות בתחומי העיצוב, האמנות, והיצירתיות המונעת על ידי AI.</div>
+        </div>
+        <div class="card" draggable="true" data-year="2023">
+            <img src="https://tbig.co.za/wp-content/uploads/2023/03/openAI-chat-gpt-1.jpg" alt="ChatGPT">
+            <p>השקת ChatGPT והתפתחות מהירה של מודלי שפה</p>
+            <div class="explanation">ChatGPT חולל מהפכה בתחום ה-AI השיחותי, מציג יכולות מרשימות בהבנה ויצירת טקסט. הוא עורר דיון ציבורי נרחב על ההשפעות של AI על חברה, חינוך, ותעסוקה.</div>
+        </div>
+    </div>
+    <button id="check-button">בדוק</button>
+    <div id="feedback"></div>
+
+    <script>
+        const cards = document.querySelectorAll('.card');
+        const slots = document.querySelectorAll('.year-slot');
+        const checkButton = document.getElementById('check-button');
+        const feedback = document.getElementById('feedback');
+        const cardBank = document.getElementById('card-bank');
+
+        // פונקציה לערבוב מערך (אלגוריתם Fisher-Yates)
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // פונקציה לערבוב הכרטיסיות
+        function shuffleCards() {
+            const cardsArray = Array.from(cards);
+            const shuffledCards = shuffleArray(cardsArray);
+            shuffledCards.forEach(card => cardBank.appendChild(card));
+        }
+
+        // קריאה לפונקציית הערבוב בטעינת הדף
+        window.addEventListener('load', shuffleCards);
+
+        cards.forEach(card => {
+            card.addEventListener('dragstart', dragStart);
+            card.addEventListener('dragend', dragEnd);
+        });
+
+        slots.forEach(slot => {
+            slot.addEventListener('dragover', dragOver);
+            slot.addEventListener('dragenter', dragEnter);
+            slot.addEventListener('dragleave', dragLeave);
+            slot.addEventListener('drop', drop);
+        });
+
+        function dragStart() {
+            this.classList.add('dragging');
+        }
+
+        function dragEnd() {
+            this.classList.remove('dragging');
+        }
+
+        function dragOver(e) {
+            e.preventDefault();
+        }
+
+        function dragEnter(e) {
+            e.preventDefault();
+            this.classList.add('hovered');
+        }
+
+        function dragLeave() {
+            this.classList.remove('hovered');
+        }
+
+        function drop() {
+            this.classList.remove('hovered');
+            const card = document.querySelector('.dragging');
+            if (this.children.length === 1) {
+                this.appendChild(card);
+            }
+        }
+
+        checkButton.addEventListener('click', () => {
+            let allCorrect = true;
+            slots.forEach(slot => {
+                if (slot.children.length > 1) {
+                    const card = slot.children[1];
+                    if (card.dataset.year === slot.dataset.year) {
+                        card.style.border = '2px solid green';
+                    } else {
+                        card.style.border = '2px solid red';
+                        allCorrect = false;
+                    }
+                } else {
+                    allCorrect = false;
+                }
+            });
+
+            if (allCorrect) {
+                feedback.textContent = 'כל הכבוד! סידרת נכון את כל האירועים!';
+                feedback.style.color = 'green';
+            } else {
+                feedback.textContent = 'נסה שוב, יש עוד טעויות';
+                feedback.style.color = 'red';
+            }
+        });
+    </script>
+</body>
+</html>
